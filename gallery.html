@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Heather's Javascript Photo Gallery</title>
+	</head>
+
+	<body>
+		<div class="diy-slideshow">
+			<figure class="show">
+				<img name="preview" src="Image/1.jpg" width="65%" />
+			</figure>
+  			<figure>
+				<img src="Image/2.JPG" width="65%" />  
+			</figure>
+  			<figure>
+				<img src="Image/4.jpg" width="65%" />  
+			</figure>
+			<figure>
+				<img src="Image/5.jpg" width="35%" />
+			</figure>
+			<figure>
+				<img src="Image/6.jpg" width="65%" />
+			</figure>
+			<figure>
+				<img src="Image/7.jpg" width="35%" />
+			</figure>
+			<figure>
+				<img src="Image/8.jpg" width="65%" />
+			</figure>
+			<figure>
+				<img src="Image/9.jpg" width="80%" />
+			</figure>
+			<figure>
+				<img src="Image/P2.jpg" width="35%" />
+			</figure>
+			<figure>
+				<img src="Image/10.jpg" width="30%" />
+			</figure>
+			<figure>
+				<img src="Image/11.jpg" width="65%" />
+			</figure>
+			<figure>
+				<img src="Image/12.jpg" width="80%" />
+			</figure>
+			<figure>
+				<img src="Image/13.tif" width="80%" />
+			</figure>
+  			<span class="prev">&laquo;</span>
+  			<span class="next">&raquo;</span>
+		</div>  
+		<p>Welcome to a preview of my portfolio work!</p>
+		<div class="thumbnails">
+					<img onmouseover="preview.src=img1.src" id="img1" src="Image/1.jpg" alt="" />
+					<img onmouseover="preview.src=img2.src" id="img2" src="Image/2.JPG" alt="" />
+					<img onmouseover="preview.src=img3.src" id="img3" src="Image/4.jpg" alt="" />
+					<img onmouseover="preview.src=img4.src" id="img4" src="Image/5.jpg" alt="" />
+					<img onmouseover="preview.src=img5.src" id="img5" src="Image/6.jpg" alt="" />
+					<img onmouseover="preview.src=img6.src" id="img6" src="Image/7.jpg" alt="" />
+					<img onmouseover="preview.src=img7.src" id="img7" src="Image/8.jpg" alt="" />
+					<img onmouseover="preview.src=img8.src" id="img8" src="Image/9.jpg" alt="" />
+					<img onmouseover="preview.src=img9.src" id="img9" src="Image/P2.jpg" alt="" />
+					<img onmouseover="preview.src=img10.src" id="img10" src="Image/10.jpg" alt="" />
+					<img onmouseover="preview.src=img11.src" id="img11" src="Image/11.jpg" alt="" />
+					<img onmouseover="preview.src=img12.src" id="img12" src="Image/12.jpg" alt="" />
+					<img onmouseover="preview.src=img13.src" id="img13" src="Image/13.tif" alt="" />
+		<div id='dv1'>
+            <form ng-controller="FrmController">
+                <h1>Post your Comment</h1>
+                <form ng-controller="FrmController">
+                    <textarea ng-model="txtcomment" placeholder="Your Comment" style='width:770px'></textarea>
+                    <button ng-click='btn_add();' style='margin-top:10px;'>Post Comment</button>
+                </form> 
+			</form>
+		</div>
+		<footer class="site-footer" id="site-footer">
+    		<div class="menu">
+        		<div class="dropdown" href="#">Menu
+            		<ul class="footer_menu">
+                		<li><a href="#">About Heather</a></li>
+                		<li><a href="#">Contact Info</a> </li>
+                		<li><a href="#">Resume</a></li>
+                		<li>
+                			<ul class="share-buttons">
+  								<li><a href="https://www.facebook.com/sharer/sharer.php?u=&t=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.URL)); return false;"><img src="images/Facebook.svg"></a></li>
+  								<li><a href="https://twitter.com/intent/tweet?source=&text=:%20" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;"><img src="images/Twitter.svg"></a></li>
+  								<li><a href="https://plus.google.com/share?url=" target="_blank" title="Share on Google+" onclick="window.open('https://plus.google.com/share?url=' + encodeURIComponent(document.URL)); return false;"><img src="images/Google+.svg"></a></li>
+  								<li><a href="http://www.linkedin.com/shareArticle?mini=true&url=&title=&summary=&source=" target="_blank" title="Share on LinkedIn" onclick="window.open('http://www.linkedin.com/shareArticle?mini=true&url=' + encodeURIComponent(document.URL) + '&title=' +  encodeURIComponent(document.title)); return false;"><img src="images/LinkedIn.svg"></a></li>
+  								<li><a href="mailto:?subject=&body=:%20" target="_blank" title="Email" onclick="window.open('mailto:?subject=' + encodeURIComponent(document.title) + '&body=' +  encodeURIComponent(document.URL)); return false;"><img src="images/Email.svg"></a></li>
+							</ul>
+						</li>
+            		</ul>
+        		</div>
+    		</div>
+		</footer>
+
+	<style type="text/css">
+		body {
+  			margin: 0; 
+  			padding: 0;
+  			background-color: #d3ffce;
+  			height: 100%;
+  			font-family: "hero", futura, arial;
+			}
+		img {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+			}
+		.diy-slideshow{
+  			position: relative;
+  			display: block;
+  			overflow: hidden;
+			}
+		figure{
+  			position: absolute;
+  			opacity: 0;
+  			transition: 1s opacity;
+			}
+		figure.show{
+  			opacity: 1;
+  			position: static;
+  			transition: 1s opacity;
+			}
+		.next, .prev{
+  			color: #fff;
+  			position: fixed;
+  			background: rgba(0,128,128, .6);
+  			top: 50%;
+  			z-index: 1;
+  			font-size: 2em;
+  			margin-top: -.75em;
+  			opacity: .3;
+  			user-select: none;
+  			transition: opacity 500ms linear;
+			}
+		.next:hover, .prev:hover{
+  			cursor: pointer;
+  			opacity: 1;
+  			
+			}
+		.next{
+  			right: 0;
+  			padding: 10px 5px 15px 10px;
+  			border-top-left-radius: 3px;
+  			border-bottom-left-radius: 3px;
+			}
+		.prev{
+  			left: 0;
+  			padding: 10px 10px 15px 5px;
+  			border-top-right-radius: 3px;
+  			border-bottom-right-radius: 3px;
+			}
+		p{
+  			margin: 10px 20px;
+  			color: rgb(0,128,128);
+  			text-shadow: 1px 1px #333333;
+  			text-align: center;
+			}
+		
+		button {
+			padding: 10px;
+			float: right;
+			margin: 0px;
+			bottom: 100px;
+			}
+			
+		.site-footer {
+    		background: rgba(0,128,128,0.5);
+    		color: white;
+    		font-size: 14px;
+    		width: 100%;
+			}
+		footer {
+    		bottom: 0;
+    		position: absolute;
+    		width: 100%;
+    		background: rgba(0,128,128,0.5);
+    		padding-top: 10px;
+    		padding-bottom: 10px;
+			}
+		div.dropdown {
+    		right: 10px;
+    		text-align: right;
+    		position: relative;
+    		padding-right: 30px;
+			}
+		ul.footer_menu li {
+    		padding: 10px;
+    		display: block;
+    		text-align: center;
+			}
+		ul.footer_menu li a {
+    		text-decoration: none;
+    		color: white;
+			}
+		ul.footer_menu li:hover {
+    		background: white;
+    		text-align: center;
+			}
+		ul.footer_menu li:hover a {
+    		color: black;
+			}
+		ul.footer_menu li:first-child {
+    		border-radius: 3px 3px 0 0;
+			}
+		ul.footer_menu {
+    		background: rgba(0,128,128, 0.7);
+    		position: absolute;
+    		opacity: 0;
+    		bottom: 25px;
+    		padding-left: 0px;
+    		right: 0;
+    		visibility: hidden;
+    		opacity: 0;
+    		transition: visibility 0.3s 0.5s, opacity 0.3s 0.5s;
+    		border-radius: 3px 3px 0 0;
+			}
+		.dropdown:hover ul.footer_menu {
+    		visibility: visible;
+    		opacity: 1;
+    		transition-delay: 0s;
+			}
+		.share-buttons li a img {
+			border: 0px hidden;
+			padding: 0px;
+			height: auto;
+			}
+		.share-buttons li a img:hover {
+			border: 0px hidden;
+			}
+		
+		.thumbnails {
+			text-align: center;
+			}
+		.thumbnails img {
+			height: 35px;
+			border: 3px solid #555;
+			padding: 1px;
+			margin: auto;
+			margin-top: 10px;
+			display: inline-block;
+			}
+
+		.thumbnails img:hover {
+			border: 3px solid rgb(0,128,128);
+			cursor:pointer;
+			}
+		.preview img {
+			max-height: 650px;
+			width: auto;
+			}
+			
+		ul.share-buttons{
+  			list-style: none;
+  			padding: 0;
+  			margin: 0;
+  			margin-left: 2px;
+  			bottom: 0px;
+			}
+
+		ul.share-buttons li{
+  			display: inline-block;
+			}
+
+		ul.share-buttons img{
+  			width: 14px;
+			}
+		
+		#dv1 {
+			position: fixed;
+			bottom: 50px;
+			left: 50px;
+			}
+		#dv1 form h1 {
+			font-size: 12px;
+			float: left;
+			margin-right: 5px;
+			}
+		#test	{
+			background-image:url(Image/1.jpg);
+			height:1300px;
+			width:1800px;
+			}
+	</style>
+	
+<script type="text/javascript">
+
+	function changeBgImage (image, id) {
+		var element = document.getElementById(id);
+		element.style.backgroundImage = "url("+image+")";
+		}
+
+	function FrmController($scope) {
+                $scope.comment = [];
+                $scope.btn_add = function() {
+                    if($scope.txtcomment !=''){
+                    $scope.comment.push($scope.txtcomment);
+                    $scope.txtcomment = "";
+                    }
+                }
+ 
+                $scope.remItem = function($index) {
+                    $scope.comment.splice($index, 1);
+                }
+            }
+
+
+	(function(){
+		var counter = 0 // to keep track of current slide
+
+  		//note that I followed along with a guide to create the slideshow of my work
+    	var $items = document.querySelectorAll('.diy-slideshow figure'), // collection of all slides, caching for performance
+    	numItems = $items.length; // total number of slides
+
+	// this shows the next slides, hides the previous
+	var showCurrent = function(){
+  	var itemToShow = Math.abs(counter%numItems);// uses remainder operator to get the actual index of the element to show  
+  	
+  	
+  
+  	// remove .show from whichever element has it at the time
+  	[].forEach.call( $items, function(el){
+    el.classList.remove('show');
+  	});
+  
+  	// add .show to the one item that's supposed to have it
+  	$items[itemToShow].classList.add('show');   
+	};
+
+	// add click events to prev & next buttons 
+	document.querySelector('.next').addEventListener('click', function() {
+     	counter++;
+     	showCurrent();
+  	}, false);
+
+	document.querySelector('.prev').addEventListener('click', function() {
+     	counter--;
+     	showCurrent();
+  	}, false);
+  
+  	document.getElementById('img1').addEventListener('mouseover', function() {
+     	counter = 0;
+     	showCurrent();
+     	
+  	}, false);
+  	document.getElementById('img2').addEventListener('mouseover', function() {
+     	counter = 1;
+     	showCurrent();
+  	}, false);
+  	document.getElementById('img3').addEventListener('mouseover', function() {
+     	counter = 2;
+     	showCurrent();
+  	}, false);
+  	document.getElementById('img4').addEventListener('mouseover', function() {
+     	counter = 3;
+     	showCurrent();
+  	}, false);
+  	document.getElementById('img5').addEventListener('mouseover', function() {
+     	counter = 4;
+     	showCurrent();
+  	}, false);
+  	document.getElementById('img6').addEventListener('mouseover', function() {
+     	counter = 5;
+     	showCurrent();
+  	}, false);
+  	document.getElementById('img7').addEventListener('mouseover', function() {
+     	counter = 6;
+     	showCurrent();
+  	}, false);
+  	document.getElementById('img8').addEventListener('mouseover', function() {
+     	counter = 7;
+     	showCurrent();
+  	}, false);
+  	document.getElementById('img9').addEventListener('mouseover', function() {
+     	counter = 8;
+     	showCurrent();
+  	}, false);
+  	document.getElementById('img10').addEventListener('mouseover', function() {
+     	counter = 9;
+     	showCurrent();
+  	}, false);
+  	document.getElementById('img11').addEventListener('mouseover', function() {
+     	counter = 10;
+     	showCurrent();
+  	}, false);
+  	document.getElementById('img12').addEventListener('mouseover', function() {
+     	counter = 11;
+     	showCurrent();
+  	}, false);
+  	document.getElementById('img13').addEventListener('mouseover', function() {
+     	counter = 12;
+     	showCurrent();
+  	}, false);
+  
+  
+	})();
+	
+	var now = new Date();
+	var hour = now.getHours();
+
+	if (hour > 17 && hour < 20){
+		document.write ('<body style="background-color: #fac472">');
+		document.write("<p>Good evening! Dinner time!</p>");}
+
+	else if (hour > 19 && hour < 22){
+		document.write ('<body style="background-color: #ee8a4f">');
+		document.write("<p>Aren't you sleepy yet?</p>");}
+
+	else if (hour > 21 || hour < 5){
+		document.write ('<body style="background-color: #666489;">');
+		document.write("<p>Why aren't you sleeping yet?</p>");}
+
+	else if (hour > 8 && hour < 18){
+		document.write ('<body style="background-color: #e0ceed">');
+		document.write ("<p>How's your day going?</p>");}
+
+	else if (hour > 6 && hour < 9){
+		document.write ('<body style="background-color: #81cec7">');
+		document.write("<p>Good morning, sunshine!</p>");}
+
+	else if (hour > 4 && hour < 7){
+		document.write ('<body style="background-color: #528b8b">');
+		document.write("<p>Up bright and early?</p>");}
+
+	else {
+		document.write ('<body style="background-color: #d3ffce">');
+		document.write("<p>Hello!</p>");}
+   
+</script>
+	</body>
+</html>
