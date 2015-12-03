@@ -2,48 +2,49 @@
 <html>
 	<head>
 		<title>Heather's Javascript Photo Gallery</title>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.min.js"></script>
 	</head>
 
 	<body>
 		<div class="diy-slideshow">
 			<figure class="show">
-				<img name="preview" src="Image/1.jpg" width="65%" />
+				<img name="preview" src="Image/1.jpg" width="60%" />
 			</figure>
   			<figure>
-				<img src="Image/2.JPG" width="65%" />  
+				<img src="Image/2.JPG" width="60%" />  
 			</figure>
   			<figure>
-				<img src="Image/4.jpg" width="65%" />  
+				<img src="Image/4.jpg" width="60%" />  
 			</figure>
 			<figure>
-				<img src="Image/5.jpg" width="35%" />
+				<img src="Image/5.jpg" width="30%" />
 			</figure>
 			<figure>
-				<img src="Image/6.jpg" width="65%" />
+				<img src="Image/6.jpg" width="60%" />
 			</figure>
 			<figure>
-				<img src="Image/7.jpg" width="35%" />
+				<img src="Image/7.jpg" width="30%" />
 			</figure>
 			<figure>
-				<img src="Image/8.jpg" width="65%" />
+				<img src="Image/8.jpg" width="60%" />
 			</figure>
 			<figure>
-				<img src="Image/9.jpg" width="80%" />
+				<img src="Image/9.jpg" width="75%" />
 			</figure>
 			<figure>
-				<img src="Image/P2.jpg" width="35%" />
+				<img src="Image/P2.jpg" width="30%" />
 			</figure>
 			<figure>
-				<img src="Image/10.jpg" width="30%" />
+				<img src="Image/10.jpg" width="25%" />
 			</figure>
 			<figure>
-				<img src="Image/11.jpg" width="65%" />
+				<img src="Image/11.jpg" width="60%" />
 			</figure>
 			<figure>
-				<img src="Image/12.jpg" width="80%" />
+				<img src="Image/12.jpg" width="70%" />
 			</figure>
 			<figure>
-				<img src="Image/13.tif" width="80%" />
+				<img src="Image/13.tif" width="75%" />
 			</figure>
   			<span class="prev">&laquo;</span>
   			<span class="next">&raquo;</span>
@@ -67,11 +68,15 @@
             <form ng-controller="FrmController">
                 <h1>Post your Comment</h1>
                 <form ng-controller="FrmController">
-                    <textarea ng-model="txtcomment" placeholder="Your Comment" style='width:770px'></textarea>
+                    <textarea ng-model="txtcomment" placeholder="Your Comment" style='max-width:770px'></textarea>
                     <button ng-click='btn_add();' style='margin-top:10px;'>Post Comment</button>
                 </form> 
 			</form>
-		</div>
+			<p><button onclick="clickCounter()" type="button">Click here!</button></p>
+				<div id="result"></div>
+				<p>This is a test of local storage! Click the button to see the counter increase.</p>
+			<body onload="checkCookie()">
+		</div>	
 		<footer class="site-footer" id="site-footer">
     		<div class="menu">
         		<div class="dropdown" href="#">Menu
@@ -268,6 +273,8 @@
 		
 		#dv1 {
 			position: fixed;
+			text-align: center;
+			width: 900px;
 			bottom: 50px;
 			left: 50px;
 			}
@@ -275,6 +282,7 @@
 			font-size: 12px;
 			float: left;
 			margin-right: 5px;
+			width: 400px;
 			}
 		#test	{
 			background-image:url(Image/1.jpg);
@@ -284,6 +292,51 @@
 	</style>
 	
 <script type="text/javascript">
+
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires;
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+    }
+    return "";
+}
+
+function checkCookie() {
+    var user = getCookie("username");
+    if (user != "") {
+        alert("Welcome back " + user);
+    } else {
+        user = prompt("Please enter your name:", "");
+        if (user != "" && user != null) {
+            setCookie("username", user, 365);
+        }
+    }
+}
+
+	
+function clickCounter() {
+    if(typeof(Storage) !== "undefined") {
+        if (sessionStorage.clickcount) {
+            sessionStorage.clickcount = Number(sessionStorage.clickcount)+1;
+        } else {
+            sessionStorage.clickcount = 1;
+        }
+        document.getElementById("result").innerHTML = "You have clicked the button " + sessionStorage.clickcount + " time(s) in this session.";
+    } else {
+        document.getElementById("result").innerHTML = "Sorry, your browser does not support web storage...";
+    }
+}
+
 
 	function changeBgImage (image, id) {
 		var element = document.getElementById(id);
